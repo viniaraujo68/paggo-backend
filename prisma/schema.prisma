@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" // SQLite file path
+}
+
+model Document {
+  id        String @id @default(uuid())
+  text      String
+  summary   String?
+  createdAt DateTime @default(now())
+}
