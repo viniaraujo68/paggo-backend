@@ -8,10 +8,20 @@ datasource db {
 }
 
 model Document {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
   filename  String
   text      String
   image     Bytes
   summary   String?
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
+  messages  Message[]  @relation("DocumentMessages")
+}
+
+model Message {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  content     String
+  order       Int
+  documentId  String
+  sentAt      DateTime   @default(now())
+  document    Document @relation(fields: [documentId], references: [id], name: "DocumentMessages")
 }
