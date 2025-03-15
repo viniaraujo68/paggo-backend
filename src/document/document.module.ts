@@ -13,5 +13,6 @@ import { ConfigModule } from '@nestjs/config';
   imports: [PrismaModule, LlmModule, ConfigModule],
   controllers: [DocumentController],
   providers: [DocumentService, PrismaService, OcrService, LlmService],
+  exports: [DocumentService],
 })
 export class DocumentModule {}

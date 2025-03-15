@@ -3,13 +3,15 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db" // SQLite file path
+  provider = "mongodb"
+  url      = env("DATABASE_URL") // MongoDB connection string
 }
 
 model Document {
-  id        String @id @default(uuid())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  filename  String
   text      String
+  image     Bytes
   summary   String?
   createdAt DateTime @default(now())
 }

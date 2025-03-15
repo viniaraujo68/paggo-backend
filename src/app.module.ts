@@ -8,11 +8,10 @@ import { DocumentController } from './document/document.controller';
 import { DocumentModule } from './document/document.module';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
+import { MessageModule } from './message/message.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), LlmModule, DocumentModule, PrismaModule
-
-  ],
+  imports: [ConfigModule.forRoot(), LlmModule, DocumentModule, PrismaModule, MessageModule],
   controllers: [AppController, DocumentController],
   providers: [AppService, OcrService, PrismaService],
 })
