@@ -12,7 +12,7 @@ export class MessageService {
   ) {}
 
   async createMessageWithLLM(content: string, order: number, documentId: string) {
-    const document = await this.DocumentService.getDocumentById(documentId);
+    const document = await this.DocumentService.getDocumentById(documentId, '1');
     const messages = await this.findAllByDocumentId(documentId);
 
     const context = document.summary + '\n' + messages.map(message => {

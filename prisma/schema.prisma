@@ -7,6 +7,13 @@ datasource db {
   url      = env("DATABASE_URL") // MongoDB connection string
 }
 
+model User {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String     @unique
+  password  String
+  documents Document[] @relation("UserDocuments")
+}
+
 model Document {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
   filename  String
@@ -15,6 +22,8 @@ model Document {
   summary   String?
   createdAt DateTime   @default(now())
   messages  Message[]  @relation("DocumentMessages")
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], name: "UserDocuments")
 }
 
 model Message {

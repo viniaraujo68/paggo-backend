@@ -22,32 +22,41 @@ export class DocumentService {
     return { text: ocrText, summary };
   }
 
-  async createDocument(filename: string, text: string, image: Uint8Array, summary?: string) {
+  async createDocument(filename: string, text: string, image: Uint8Array, userId: string, summary?: string) {
     return this.prisma.document.create({
       data: {
         filename,
         text,
         image,
         summary,
+        userId,
       },
     });
   }
 
-  async getAllDocuments() {
-    return this.prisma.document.findMany();
+  async getAllDocuments(userId: string) {
+    return this.prisma.document.findMany({
+      where: { userId },
+    });
   }
 
-  async getDocumentById(id: string) {
-    const document = await this.prisma.document.findUnique({
-      where: { id: id },
+  async getDocumentById(id: string, userId: string) {
+    const document = await this.prisma.document.findFirst({
+      where: { id, userId },
     });
     if (!document) {
-      throw new Error(`Document with id ${id} not found`);
+      throw new Error(`Document with id ${id} not found for user ${userId}`);
     }
     return document;
   }
 
-  async deleteDocument(id: string) {
+  async deleteDocument(id: string, userId: string) {
+    const document = await this.prisma.document.findFirst({
+      where: { id, userId },
+    });
+    if (!document) {
+      throw new Error(`Document with id ${id} not found for user ${userId}`);
+    }
     return this.prisma.document.delete({
       where: { id },
     });

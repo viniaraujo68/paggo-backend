@@ -9,10 +9,13 @@ import { DocumentModule } from './document/document.module';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { MessageModule } from './message/message.module';
+import { AuthModule } from './auth/auth.module';
+import { UserService } from './user/user.service';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), LlmModule, DocumentModule, PrismaModule, MessageModule],
+  imports: [ConfigModule.forRoot(), LlmModule, DocumentModule, PrismaModule, MessageModule, AuthModule, UserModule],
   controllers: [AppController, DocumentController],
-  providers: [AppService, OcrService, PrismaService],
+  providers: [AppService, OcrService, PrismaService, UserService],
 })
 export class AppModule {}

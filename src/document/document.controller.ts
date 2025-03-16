@@ -22,7 +22,7 @@ export class DocumentController {
 
   @Get('all')
   async getAllDocuments() {
-    const documents = await this.documentService.getAllDocuments();
+    const documents = await this.documentService.getAllDocuments('1');
     return documents.map(doc => ({
       id: doc.id,
       imageUrl: `data:image/jpeg;base64,${Buffer.from(doc.image).toString('base64')}`,
@@ -31,6 +31,6 @@ export class DocumentController {
 
   @Get(':id')
   async getDocumentById(@Param('id') id: string) {
-    return this.documentService.getDocumentById(id);
+    return this.documentService.getDocumentById(id, '1');
   }
 }
