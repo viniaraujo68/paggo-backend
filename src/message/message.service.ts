@@ -20,8 +20,6 @@ export class MessageService {
       return prefix + message.content;
     }).join(' ');
 
-    console.log('Context:', context);
-
     const llmResponse = await this.llmService.answerQuestion(content, context);
 
     const llmMessage = await this.prisma.message.create({
