@@ -15,7 +15,7 @@ export class MessageService {
     const document = await this.DocumentService.getDocumentById(documentId, userId);
     const messages = await this.findAllByDocumentId(documentId);
 
-    const context = document.summary + '\n' + messages.map(message => {
+    const context = document.text + '\n ' + messages.map(message => {
       const prefix = message.order % 2 === 0 ? "ANSWER: " : "QUESTION: ";
       return prefix + message.content;
     }).join(' ');
