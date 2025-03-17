@@ -6,7 +6,7 @@ async function bootstrap() {
   app.enableCors({
     origin: 'https://paggo-frontend-419h.vercel.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
+    allowedHeaders: 'Content-Type, Accept, Authorization',
   });
   await app.listen(process.env.PORT ?? 3001);
 }
