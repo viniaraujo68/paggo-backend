@@ -9,7 +9,6 @@ export class LlmController {
 	async explainInvoice(
 		@Body() body: { text: string; question: string },
 	): Promise<{ explanation: string }> {
-		console.log('Request received:', body);
 		const explanation = await this.llmService.explainInvoice(
 			body.text,
 			body.question,
