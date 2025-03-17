@@ -12,12 +12,12 @@ export class DocumentService {
     private readonly prisma: PrismaService,
   ) {}
 
-  async processUploadedDocument(file: Multer.File) {
+  async processUploadedDocument(file: Multer.File, userId: string) {
     const ocrText = await this.ocrService.extractTextFromImage(file.buffer);
 
     const summary = await this.llmService.explainInvoice(ocrText, 'Summarize this invoice');
     
-    const document = await this.createDocument(file.originalname, ocrText, file.buffer, summary);
+    const document = await this.createDocument(file.originalname, ocrText, file.buffer, userId ,summary);
 
     return { text: ocrText, summary };
   }

@@ -11,8 +11,8 @@ export class MessageService {
     private readonly DocumentService: DocumentService,
   ) {}
 
-  async createMessageWithLLM(content: string, order: number, documentId: string) {
-    const document = await this.DocumentService.getDocumentById(documentId, '1');
+  async createMessageWithLLM(content: string, order: number, documentId: string, userId: string) {
+    const document = await this.DocumentService.getDocumentById(documentId, userId);
     const messages = await this.findAllByDocumentId(documentId);
 
     const context = document.summary + '\n' + messages.map(message => {

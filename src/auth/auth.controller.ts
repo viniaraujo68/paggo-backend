@@ -13,7 +13,6 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() body: { name: string; password: string }) {
-    console.log('Received a register request');
 	const { name, password } = body;
     return this.authService.register(name, password);
   }

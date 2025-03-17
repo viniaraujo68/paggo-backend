@@ -21,9 +21,9 @@ model Document {
   image     Bytes
   summary   String?
   createdAt DateTime   @default(now())
-  messages  Message[]  @relation("DocumentMessages")
   userId    String
   user      User       @relation(fields: [userId], references: [id], name: "UserDocuments")
+  messages  Message[]  @relation("DocumentMessages")
 }
 
 model Message {

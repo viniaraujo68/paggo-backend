@@ -16,13 +16,11 @@ export class AuthService {
       if (!user) {
         throw new NotFoundException('User not found');
       }
-	  console.log(await bcrypt.hash(pass, 10));
-	  console.log(user.password);
+
       const isMatch = await bcrypt.compare(pass, user.password);
       if (!isMatch) {
         throw new UnauthorizedException('Invalid password');
       }
-
       const payload = { name: user.name, sub: user.id };
       return { access_token: this.jwtService.sign(payload) };
     } catch (error) {
