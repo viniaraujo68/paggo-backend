@@ -54,11 +54,17 @@ export class DocumentService {
     const document = await this.prisma.document.findFirst({
       where: { id, userId },
     });
+
     if (!document) {
       throw new Error(`Document with id ${id} not found for user ${userId}`);
     }
-    return this.prisma.document.delete({
+
+    await this.prisma.message.deleteMany({
+      where: { documentId: id },
+    });
+
+    return await this.prisma.document.delete({
       where: { id },
     });
-  }
+}
 }

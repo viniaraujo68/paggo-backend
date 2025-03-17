@@ -47,4 +47,10 @@ export class MessageService {
       orderBy: { order: 'asc' },
     });
   }
+
+  async deleteAllByDocumentId(documentId: string) {
+    return this.prisma.message.deleteMany({
+      where: { documentId },
+    });
+  }
 }

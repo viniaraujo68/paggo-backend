@@ -37,7 +37,7 @@ export class DocumentController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete(':id')
+  @Delete('/delete/:id')
   async deleteDocument(@Param('id') id: string, @Request() req) {
     return this.documentService.deleteDocument(id, req.user.userId);
   }
